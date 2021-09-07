@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alquini WEB</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+        {LIBRARIES}
+        {HEAD}
+        <script>
+            function update_messages_menu() {
+                $.get('engine.php?class=MessageList&theme=theme2', function(data) {
+                    $('#envelope_messages').html(data);
+                });
+            }
+            
+            function update_notifications_menu() {
+                $.get('engine.php?class=NotificationList&theme=theme2', function(data) {
+                    $('#envelope_notifications').html(data);
+                });
+            }
+            
+            $(function() {
+                $.get('engine.php?class=SearchBox', function(data)
+                {
+                  $('#navbar-main').append(data).show();
+                  var search_box = $('.navbar-nav').nextAll('div');
+                  search_box.css('padding-top', '10px');
+                  search_box.css('padding-left', '25px');
+                  search_box.css('display', 'table');
+                  search_box.css('float', 'right');
+                  search_box.attr('id', 'search-box');
+                });
+                
+                update_messages_menu();
+                update_notifications_menu();
+                
+                setInterval( update_messages_menu, 5000);
+                setInterval( update_notifications_menu, 5000);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="pull-left">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="glyphicon glyphicon-bar"></span>
+                            <span class="glyphicon glyphicon-bar"></span>
+                            <span class="glyphicon glyphicon-bar"></span>
+                        </button>
+                        <a href="#" class="navbar-brand">{EMPRESA}</a>
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="navbar-collapse collapse" id="navbar-main">
+                        <ul class="nav navbar-nav pull-left"> 
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-user"></i>
+                                    <span class="hidden-xs">{username}</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header" style="height:initial">
+                                        <i class="fa fa-user fa-3x" style="color:white"></i>
+                                        <p>
+                                            {username}
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a generator="adianti" href="index.php?class=SystemProfileView" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
+                                        <div class="pull-left">
+                                            <a generator="adianti" href="index.php?class=LoginForm&method=reloadPermissions&static=1" class="btn btn-default btn-flat">Recarregar</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a generator="adianti" href="index.php?class=LoginForm&method=onLogout&static=1" class="btn btn-default btn-flat">Sair</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>           
+                            <li class="dropdown messages-menu" id="envelope_messages">
+                                <!-- /.dropdown-messages -->
+                            </li>              
+                            <li class="dropdown notifications-menu" id="envelope_notifications">
+                                <!-- /.dropdown-messages -->
+                            </li>              
+                            <li class="dropdown notifications-menu" id="support">
+                                <a href="https://cliente.alquini.com.br/submitticket.php?step=2&deptid=1" target="_blank">
+                                    <i class="fa fa-life-ring fa-fw"></i>
+                                </a>
+                            </li>
+                        </ul>        
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        {MENU}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div id="adianti_div_content" class="content"></div>
+            <div id="adianti_online_content"></div>
+            <div id="adianti_online_content2"></div>
+            <div id="pageboth"><br></div>
+        </div>
+        
+        <footer id="footer">
+            <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="container text-center">
+                    <div class="footer-logo">
+                        <a href="http://web.alquini.com.br" target="_blank"><img src="app/templates/{template}/images/Logo.png" alt="logo" height="100"></a>
+                    </div>
+                    <div class="social-icons">
+                        <ul>
+                            <li><a class="envelope" href="mailto:contato@alquini.com.br" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                            <li><a class="skype" href="skype:jaderalquini?chat" target="_blank"><i class="fa fa-skype"></i></a></li> 
+                            <li><a class="google-plus" href="https://plus.google.com/+J%C3%A1derAlexandreAlquini" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a class="facebook" href="http://fb.com/alquiniweb"><i class="fa fa-facebook" target="_blank"></i></a></li>
+                            <li><a class="linkedin" href="http://www.linkedin.com/in/jáder-alexandre-alquini-77b0397a" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a class="whatsapp" href="intent://send/554792294433#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="text-center">
+                            <p>Copyright &copy; 2017 <a href="http://web.alquini.com.br">AlquiniWEB</a>. Todos os Direitos Reservados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
