@@ -1,0 +1,24 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-datavolume:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+  php:
+    build: .
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+    links:
+      - db
+volumes:
+  mysql-datavolume:
